@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#101010">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Transaction</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main id="dashboard">
+      <section class="intro">
+        <h1>Create transaction</h1>
+        <p>Select one of the four supported transaction types and enter the details.</p>
+      </section>
+
+      <section class="panel">
+        <label class="field-label">Transaction type</label>
+        <div class="types" id="types">
+          <button class="type active" data-type="send">Send Money</button>
+          <button class="type" data-type="till">Buy Goods</button>
+          <button class="type" data-type="paybill">Pay Bill</button>
+          <button class="type" data-type="pochi">Pochi la Biashara</button>
+        </div>
+
+        <form id="demoForm">
+          <label for="amount">Amount (KES)</label>
+          <input id="amount" inputmode="decimal" type="number" min="0.01" step="0.01" placeholder="e.g. 100" required>
+
+          <label for="recipient" id="recipientLabel">Recipient name</label>
+          <input id="recipient" maxlength="80" placeholder="Enter recipient name" required>
+
+          <label for="destination" id="destinationLabel">Phone number</label>
+          <input id="destination" maxlength="24" placeholder="Enter phone number" required>
+
+          <div id="accountGroup" hidden>
+            <label for="account">Account number</label>
+            <input id="account" maxlength="40" placeholder="Enter account number">
+          </div>
+
+          <label for="fee">Transaction cost (KES)</label>
+          <input id="fee" type="number" min="0" step="0.01" value="0" required>
+
+          <div class="time-hint">◷ &nbsp; Date and time are captured automatically (Kenya time).</div>
+          <button class="primary" type="submit">preview</button>
+        </form>
+      </section>
+
+      <p class="disclaimer"></p>
+    </main>
+
+    <main id="preview" hidden>
+      <div class="preview-nav">
+        <button id="backBtn" class="icon-button" aria-label="Back">✕</button>
+        <button id="shareBtn" class="share">
+          <img class="share-logo" src="assets/logo.jpeg" alt="">
+          &nbsp;Share Details
+        </button>
+      </div>
+
+      <div class="celebration">
+        <img src="assets/congrats.jpeg" alt="">
+      </div>
+
+      <article class="receipt">
+        <div class="receipt-body">
+          <h2>Your transaction was<br>successful</h2>
+          <p class="date" id="dateOut"></p>
+          <h1 class="amount" id="amountOut"></h1>
+          <p class="fee">Transaction cost: <b id="feeOut"></b></p>
+
+          <p class="reference">
+            ID: <span id="referenceOut"></span>
+            <button id="copyBtn" aria-label="Copy ID">▢ Copy</button>
+          </p>
+
+          <div class="recipient-card">
+            <div class="subheading" id="paidLabel"></div>
+            <div class="recipient-row">
+              <div class="avatar" id="avatarOut"></div>
+              <div>
+                <div class="recipient-name" id="recipientOut"></div>
+                <div class="destination" id="destinationOut"></div>
+                <div class="destination" id="accountOut" hidden></div>
+              </div>
+            </div>
+
+            <div id="tipSection" class="tip-section">
+              <p>Liked our Service?</p>
+              <span class="tip-button">Add Tip</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="actions">
+        <button id="favoriteBtn"><span><img src="assets/favorite.jpeg" alt=""></span>Add to<br>favourites</button>
+        <button id="scheduleBtn"><span>▦</span>Schedule<br>payment</button>
+        <button id="downloadBtn"><span><img src="assets/download-transcript.jpeg" alt=""></span>Download<br>receipt</button>
+      </div>
+
+      <button id="doneBtn" class="done">Done</button>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

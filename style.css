@@ -1,0 +1,805 @@
+@font-face {
+  font-family: Roboto;
+  src: url("assets/roboto-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: Roboto, Arial, sans-serif;
+  color: #f6f6f6;
+  background: #101010;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #101010;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  background: #101010;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#dashboard,
+#preview {
+  width: min(100%, 620px);
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+
+#dashboard {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header,
+.brand,
+.preview-nav,
+.recipient-row,
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.header,
+.preview-nav {
+  justify-content: space-between;
+}
+
+.brand {
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #00a83d;
+  color: white;
+  font-size: 30px;
+}
+
+.brand strong {
+  display: block;
+  font-size: 19px;
+}
+
+.brand small {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.pill {
+  border: 1px solid #009b39;
+  border-radius: 30px;
+  padding: 8px 10px;
+  color: #43d875;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.intro {
+  margin: 0 0 20px;
+}
+
+.intro h1 {
+  margin: 0 0 8px;
+  font-size: 27px;
+}
+
+.intro p,
+.disclaimer {
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.intro p {
+  margin: 0;
+}
+
+.panel {
+  border: 1px solid #353535;
+  border-radius: 22px;
+  padding: 22px;
+  background: #202020;
+}
+
+.field-label,
+form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.types {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 20px;
+}
+
+.type {
+  min-width: 0;
+  border: 1px solid #484848;
+  border-radius: 12px;
+  padding: 12px 8px;
+  background: #303030;
+  color: white;
+  font-size: 13px;
+}
+
+.type.active {
+  border-color: #00c64d;
+  background: #073f20;
+  color: #68ef9b;
+}
+
+form label {
+  margin: 14px 0 7px;
+}
+
+input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #494949;
+  border-radius: 10px;
+  padding: 12px;
+  outline: none;
+  background: #303030;
+  color: #fff;
+}
+
+input:focus {
+  border-color: #00bd47;
+}
+
+.time-hint {
+  margin: 16px 0;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.primary,
+.done {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 15px;
+  background: #00aa3c;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.disclaimer {
+  margin: 18px auto 0;
+  text-align: center;
+}
+
+#preview {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-nav {
+  flex: 0 0 auto;
+  margin: 0 0 74px;
+}
+
+.icon-button {
+  width: 54px;
+  height: 54px;
+  border: 0;
+  border-radius: 50%;
+  background: #303030;
+  color: #02bd47;
+  font-size: 28px;
+}
+
+.share {
+  border: 0;
+  border-radius: 13px;
+  padding: 14px 16px;
+  background: #202020;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.share-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.celebration {
+  position: relative;
+  z-index: 2;
+  width: 120px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  margin: 0 auto -62px;
+  border: 5px solid #40546b;
+  border-radius: 50%;
+  background: #303030;
+  font-size: 54px;
+}
+
+.receipt {
+  overflow: hidden;
+  border-top: 4px solid transparent;
+  border-radius: 20px;
+  background-image: linear-gradient(#202020, #202020), linear-gradient(95deg, #00c9ff, #00c96b, #00ff00);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+}
+
+.receipt-body {
+  padding: 82px 22px 26px;
+}
+
+.demo-banner {
+  max-width: 330px;
+  margin: 0 auto 24px;
+  border: 2px solid #50da7b;
+  border-radius: 7px;
+  padding: 10px;
+  color: #69ec96;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+h2 {
+  margin: 0 0 26px;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.date {
+  margin: 0 0 24px;
+  color: #bcbcbc;
+  font-size: 16px;
+  text-align: center;
+}
+
+.amount {
+  margin: 0 0 22px;
+  font-size: 36px;
+  text-align: center;
+}
+
+.fee {
+  margin-bottom: 16px;
+  color: #bdbdbd;
+  font-size: 15px;
+  text-align: center;
+}
+
+.fee b {
+  font-weight: 600;
+}
+
+.reference {
+  overflow-wrap: anywhere;
+  color: #00aa42;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.reference button {
+  border: 0;
+  background: none;
+  color: #00a940;
+  font-size: 15px;
+}
+
+.recipient-card {
+  margin-top: 36px;
+  border-radius: 17px;
+  padding: 20px;
+  background: #333;
+}
+
+.subheading {
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.recipient-row {
+  gap: 15px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #68003b;
+  color: #ef87c2;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.recipient-name {
+  overflow-wrap: anywhere;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.destination {
+  overflow-wrap: anywhere;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.tip-section {
+  margin-top: 30px;
+  font-size: 19px;
+}
+
+.tip-section p {
+  margin: 0 0 10px;
+}
+
+.tip-button {
+  display: inline-block;
+  border: 1px solid #00b43c;
+  border-radius: 12px;
+  padding: 9px 16px;
+  color: #00b43c;
+  font-size: 17px;
+}
+
+.actions {
+  justify-content: space-around;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.actions button {
+  border: 0;
+  background: none;
+  color: white;
+  font-size: 13px;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.actions span {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  background: #303030;
+  color: #00b646;
+  font-size: 32px;
+}
+
+.done {
+  flex: 0 0 auto;
+  margin-top: 17px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.preview-note {
+  font-size: 12px;
+}
+
+@media (max-width: 480px) {
+  #dashboard,
+  #preview {
+    padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  }
+
+  .intro {
+    margin-bottom: 12px;
+  }
+
+  .intro h1 {
+    margin-bottom: 5px;
+    font-size: 23px;
+  }
+
+  .intro p {
+    font-size: 12px;
+  }
+
+  .panel {
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .field-label,
+  form label {
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+
+  .types {
+    gap: 7px;
+    margin-bottom: 12px;
+  }
+
+  .type {
+    min-height: 38px;
+    padding: 9px 5px;
+    font-size: 12px;
+  }
+
+  form label {
+    margin-top: 10px;
+  }
+
+  input {
+    min-height: 40px;
+    padding: 9px 10px;
+    font-size: 14px;
+  }
+
+  .time-hint {
+    margin: 11px 0;
+    font-size: 11px;
+  }
+
+  .primary {
+    padding: 11px;
+    font-size: 15px;
+  }
+
+  .disclaimer {
+    margin-top: 10px;
+    font-size: 11px;
+  }
+
+  .preview-nav {
+    margin-bottom: 40px;
+    transform: translateY(42px);
+  }
+
+  .icon-button {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    color: #ef66a3;
+  }
+
+  .share {
+    padding: 10px 13px;
+    font-size: 15px;
+  }
+
+  .share-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .celebration {
+    width: 88px;
+    height: 88px;
+    margin-bottom: -58px;
+    overflow: hidden;
+    transform: translateY(-8px);
+  }
+
+  .celebration img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .receipt-body {
+    padding: 64px 16px 12px;
+  }
+
+  #preview h2 {
+    margin-bottom: 12px;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .date {
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  .amount {
+    margin-bottom: 10px;
+    font-size: 26px;
+  }
+
+  .fee {
+    margin-bottom: 9px;
+    font-size: 12px;
+  }
+
+  .reference {
+    margin: 10px 0;
+    font-size: 12px;
+  }
+
+  .reference button {
+    font-size: 12px;
+  }
+
+  .recipient-card {
+    margin-top: 36px;
+    min-height: 112px;
+    border-radius: 14px;
+    padding: 12px;
+  }
+
+  .subheading {
+    margin: 0 0 8px;
+    font-size: 12px;
+  }
+
+  .recipient-row {
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+  }
+
+  .recipient-name {
+    font-size: 15px;
+  }
+
+  .destination {
+    margin-top: 5px;
+    font-size: 13px;
+  }
+
+  .tip-section {
+    margin-top: 18px;
+    font-size: 16px;
+  }
+
+  .tip-section p {
+    margin-bottom: 8px;
+  }
+
+  .tip-button {
+    border-radius: 9px;
+    padding: 8px 14px;
+    font-size: 15px;
+  }
+
+  .actions {
+    gap: 5px;
+    margin: auto 0 18px;
+  }
+
+  .actions button {
+    font-size: 13px;
+  }
+
+  .actions span {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 6px;
+    font-size: 28px;
+  }
+
+  .actions span img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+  }
+
+  .done {
+    padding: 14px;
+    font-size: 17px;
+  }
+
+  #preview {
+    padding-bottom: max(112px, env(safe-area-inset-bottom));
+  }
+
+  #preview .done {
+    background: #299e45;
+  }
+}
+
+@media (max-width: 360px) {
+  #dashboard,
+  #preview {
+    padding-right: max(9px, env(safe-area-inset-right));
+    padding-left: max(9px, env(safe-area-inset-left));
+  }
+
+  .panel {
+    padding: 11px;
+  }
+
+  .type {
+    font-size: 11px;
+  }
+
+  .actions button {
+    font-size: 10px;
+  }
+}
+
+@media (min-height: 700px) and (max-width: 480px) {
+  #preview .done {
+    margin-top: auto;
+  }
+}
+
+@media (max-height: 700px) and (max-width: 480px) {
+  .intro {
+    margin-bottom: 10px;
+  }
+
+  .panel {
+    padding: 13px;
+  }
+}
+
+@media (max-height: 650px) and (max-width: 480px) {
+  #dashboard,
+  #preview {
+    padding-top: max(8px, env(safe-area-inset-top));
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+
+  #dashboard {
+    justify-content: center;
+  }
+
+  .intro {
+    margin-bottom: 8px;
+  }
+
+  .intro p {
+    font-size: 11px;
+  }
+
+  .panel {
+    padding: 8px;
+  }
+
+  .field-label,
+  form label {
+    margin-bottom: 3px;
+  }
+
+  .types {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .type {
+    min-height: 31px;
+    padding: 6px 4px;
+  }
+
+  form label {
+    margin-top: 4px;
+  }
+
+  input {
+    min-height: 34px;
+    padding: 7px;
+    font-size: 13px;
+  }
+
+  .time-hint {
+    margin: 7px 0;
+    font-size: 10px;
+  }
+
+  .primary {
+    padding: 9px;
+  }
+
+  .receipt-body {
+    padding-top: 34px;
+    padding-bottom: 8px;
+  }
+
+  h2 {
+    margin-bottom: 7px;
+    font-size: 19px;
+    line-height: 1.15;
+  }
+
+  .date {
+    margin-bottom: 4px;
+  }
+
+  .amount {
+    margin-bottom: 4px;
+    font-size: 25px;
+  }
+
+  .fee {
+    margin: 8px 0 4px;
+  }
+
+  .reference {
+    margin: 8px 0;
+  }
+
+  .recipient-card {
+    margin-top: 8px;
+    padding: 8px;
+  }
+
+  .subheading {
+    margin-bottom: 6px;
+  }
+
+  .tip-section {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  .tip-section p {
+    margin-bottom: 4px;
+  }
+
+  .tip-button {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  .actions {
+    margin: 6px 0;
+  }
+
+  .done {
+    padding: 10px;
+  }
+}

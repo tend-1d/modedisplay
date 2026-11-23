@@ -421,6 +421,13 @@ h2 {
   font-size: 32px;
 }
 
+.actions span img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
 .done {
   flex: 0 0 auto;
   font-size: 20px;

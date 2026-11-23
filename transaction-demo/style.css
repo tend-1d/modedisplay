@@ -607,8 +607,8 @@ h2 {
   }
 
   .tip-section {
-    margin-top: 18px;
-    font-size: 16px;
+    margin-top: 24px;
+    font-size: 15px;
   }
 
   .tip-section p {
@@ -617,8 +617,8 @@ h2 {
 
   .tip-button {
     border-radius: 9px;
-    padding: 8px 14px;
-    font-size: 15px;
+    padding: 6px 12px;
+    font-size: 14px;
   }
 
   .actions {
@@ -788,8 +788,8 @@ h2 {
   }
 
   .tip-section {
-    margin-top: 8px;
-    font-size: 14px;
+    margin-top: 24px;
+    font-size: 15px;
   }
 
   .tip-section p {
@@ -797,8 +797,8 @@ h2 {
   }
 
   .tip-button {
-    padding: 5px 10px;
-    font-size: 13px;
+    padding: 6px 12px;
+    font-size: 14px;
   }
 
   .actions {

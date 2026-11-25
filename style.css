@@ -421,9 +421,16 @@ h2 {
   font-size: 32px;
 }
 
+.actions span img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
 .done {
   flex: 0 0 auto;
-  margin-top: 17px;
+  margin-top: 32px;
   font-size: 20px;
   font-weight: 400;
 }
@@ -601,8 +608,8 @@ h2 {
   }
 
   .tip-section {
-    margin-top: 18px;
-    font-size: 16px;
+    margin-top: 24px;
+    font-size: 15px;
   }
 
   .tip-section p {
@@ -611,8 +618,8 @@ h2 {
 
   .tip-button {
     border-radius: 9px;
-    padding: 8px 14px;
-    font-size: 15px;
+    padding: 6px 12px;
+    font-size: 14px;
   }
 
   .actions {
@@ -673,7 +680,7 @@ h2 {
 
 @media (min-height: 700px) and (max-width: 480px) {
   #preview .done {
-    margin-top: auto;
+    margin-top: 32px;
   }
 }
 
@@ -782,8 +789,8 @@ h2 {
   }
 
   .tip-section {
-    margin-top: 8px;
-    font-size: 14px;
+    margin-top: 24px;
+    font-size: 15px;
   }
 
   .tip-section p {
@@ -791,12 +798,12 @@ h2 {
   }
 
   .tip-button {
-    padding: 5px 10px;
-    font-size: 13px;
+    padding: 6px 12px;
+    font-size: 14px;
   }
 
   .actions {
-    margin: 6px 0;
+    margin: 32px 0;
   }
 
   .done {

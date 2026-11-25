@@ -310,6 +310,8 @@ input:focus {
 }
 
 .preview-nav {
+  --mpesa-logo-diameter: 53px;
+  --mpesa-logo-box-size: 53px;
   position: relative;
   z-index: 4;
   flex: 0 0 auto;
@@ -328,11 +330,11 @@ input:focus {
 }
 
 .icon-button.mpesa-button {
-  width: 76px;
-  height: 76px;
-  flex: 0 0 76px;
+  width: var(--mpesa-logo-box-size);
+  height: var(--mpesa-logo-box-size);
+  flex: 0 0 var(--mpesa-logo-box-size);
   border-radius: 0;
-  padding: 5px;
+  padding: 0;
   background: transparent;
   transform: translateY(-12px);
 }
@@ -358,15 +360,16 @@ input:focus {
   position: absolute;
   z-index: 5;
   top: -12px;
-  left: 78px;
-  width: min(324px, 60vw, calc(100vw - 120px));
-  border-radius: 12px;
-  padding: 10px 12px;
+  left: calc(var(--mpesa-logo-box-size) + 8px);
+  width: var(--mpesa-logo-diameter);
+  border: 1px solid #45454d;
+  border-radius: 2px;
+  padding: 4px;
   background: #202026;
   box-shadow: 0 4px 14px #0008;
   color: #e6e6e9;
-  font-size: 16px;
-  line-height: 1.2;
+  font-size: 7px;
+  line-height: 1.1;
   overflow-wrap: anywhere;
   opacity: 0;
   transform: translateX(-8px) scale(.96);
@@ -384,7 +387,7 @@ input:focus {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 5;
 }
 
 @keyframes confirmation-message-life {
@@ -763,14 +766,13 @@ h2 {
   }
 
   .icon-button.mpesa-button {
-    width: 76px;
-    height: 76px;
-    flex-basis: 76px;
-    padding: 5px;
+    width: var(--mpesa-logo-box-size);
+    height: var(--mpesa-logo-box-size);
+    flex-basis: var(--mpesa-logo-box-size);
   }
 
   .confirmation-bubble {
-    min-height: 134px;
+    min-height: 0;
   }
 
   .share {

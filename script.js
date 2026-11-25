@@ -18,6 +18,40 @@ const money = amount => 'Ksh ' + Number(amount).toLocaleString('en-KE', {
   maximumFractionDigits: 2
 });
 
+const sendMoneyFeeBands = [
+  { max: 100, fee: 0 },
+  { max: 500, fee: 7 },
+  { max: 1000, fee: 13 },
+  { max: 1500, fee: 23 },
+  { max: 2500, fee: 33 },
+  { max: 3500, fee: 53 },
+  { max: 5000, fee: 57 },
+  { max: 7500, fee: 78 },
+  { max: 10000, fee: 90 },
+  { max: 15000, fee: 100 },
+  { max: 20000, fee: 105 },
+  { max: 250000, fee: 108 }
+];
+
+function calculateTransactionFee(transactionType, amount) {
+  if (transactionType === 'paybill') return null;
+  if (transactionType === 'till') return 0;
+  if (transactionType !== 'send' && transactionType !== 'pochi') {
+    throw new RangeError(`Unsupported transaction type: ${transactionType}`);
+  }
+  if (!Number.isFinite(amount) || amount < 1 || amount > 250000) {
+    throw new RangeError('Transaction amount must be between Ksh 1 and Ksh 250,000.');
+  }
+
+  const feeBand = sendMoneyFeeBands.find(band => amount <= band.max);
+  if (!feeBand) throw new RangeError('No transaction fee is available for this amount.');
+  return feeBand.fee;
+}
+
+const transactionFeeText = transaction => transaction.fee === null
+  ? 'Varies by biller'
+  : money(transaction.fee);
+
 const dateFormat = date => {
   const parts = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'Africa/Nairobi',
@@ -155,23 +189,24 @@ function submitTransaction(formId, source) {
   }
 
   const now = new Date();
+  const amount = Number(source === 'send' ? $('sendAmount').value : $('lipaAmount').value);
   last = {
     type,
-    amount: Number(source === 'send' ? $('sendAmount').value : $('lipaAmount').value),
+    amount,
     recipient: recipientName,
     destination,
     account,
     paymentMethod,
-    fee: 0,
+    fee: calculateTransactionFee(type, amount),
     date: now.toISOString(),
     reference: 'UK' + Math.random().toString(36).slice(2, 10).toUpperCase()
   };
 
   $('dateOut').textContent = dateFormat(now);
   const action = type === 'send' || type === 'pochi' ? 'sent to' : 'paid to';
-  $('confirmationMessage').textContent = `${last.reference} Confirmed. Ksh${last.amount.toFixed(2)} ${action} ${last.recipient.toUpperCase()} on ${confirmationDateFormat(now)}. New M-PESA balance is Ksh0.00. Transaction cost, Ksh${last.fee.toFixed(2)}. Amount you can transact within the day is 499,600.00.`;
+  $('confirmationMessage').textContent = `${last.reference} Confirmed. Ksh${last.amount.toFixed(2)} ${action} ${last.recipient.toUpperCase()} on ${confirmationDateFormat(now)}. New M-PESA balance is Ksh0.00. Transaction cost, ${transactionFeeText(last)}. Amount you can transact within the day is 499,600.00.`;
   $('amountOut').textContent = money(last.amount);
-  $('feeOut').textContent = money(last.fee);
+  $('feeOut').textContent = transactionFeeText(last);
   $('referenceOut').textContent = last.reference;
   $('paidLabel').textContent = labels[type][2];
   $('recipientOut').textContent = last.recipient;
@@ -313,7 +348,7 @@ Amount: ${money(last.amount)}
 Recipient: ${last.recipient}
 Destination: ${last.destination}
 ${last.type === 'paybill' ? 'Account: ' + last.account + '\n' : ''}Payment method: ${last.paymentMethod}
-Transaction cost: ${money(last.fee)}
+Transaction cost: ${transactionFeeText(last)}
 Date: ${dateFormat(new Date(last.date))}
 Demo reference: ${last.reference}
 

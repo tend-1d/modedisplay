@@ -1561,8 +1561,14 @@ h2 {
 
 .balance-carousel {
   margin-left: 0;
-  margin-right: -16px;
+  margin-right: calc(0px - max(12px, env(safe-area-inset-right)));
   padding-left: 0;
+}
+
+@media (max-width: 360px) {
+  .balance-carousel {
+    margin-right: calc(0px - max(9px, env(safe-area-inset-right)));
+  }
 }
 
 .balance-card {

@@ -342,6 +342,52 @@ h2 {
   background: #333;
 }
 
+.zidi-section {
+  min-height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  border: 1px dashed #40546b;
+  border-radius: 14px;
+  padding: 14px;
+  background: #202020;
+}
+
+.zidi-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #efefef;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.zidi-logo {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #13a65a;
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.zidi-settings {
+  min-width: 168px;
+  border: 0;
+  border-radius: 12px;
+  padding: 16px 12px;
+  background: #13a65a;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .subheading {
   margin-bottom: 15px;
   font-size: 15px;
@@ -398,6 +444,11 @@ h2 {
   justify-content: space-around;
   gap: 8px;
   margin: 24px 0;
+}
+
+.send-preview .actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .actions button {
@@ -581,6 +632,32 @@ h2 {
     min-height: 112px;
     border-radius: 14px;
     padding: 12px;
+  }
+
+  .zidi-section {
+    min-height: 82px;
+    gap: 8px;
+    margin-top: 14px;
+    border-radius: 12px;
+    padding: 10px;
+  }
+
+  .zidi-brand {
+    gap: 9px;
+    font-size: 13px;
+  }
+
+  .zidi-logo {
+    width: 46px;
+    height: 46px;
+    font-size: 17px;
+  }
+
+  .zidi-settings {
+    min-width: 116px;
+    border-radius: 10px;
+    padding: 12px 8px;
+    font-size: 13px;
   }
 
   .subheading {

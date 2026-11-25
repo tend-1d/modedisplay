@@ -80,13 +80,16 @@ $('demoForm').addEventListener('submit', event => {
   $('feeOut').textContent = money(last.fee);
   $('referenceOut').textContent = last.reference;
   $('paidLabel').textContent = labels[type][2];
-  $('recipientOut').textContent = last.recipient.toUpperCase();
-  $('destinationOut').textContent = labels[type][3] + ' ' + last.destination;
+  $('recipientOut').textContent = last.recipient;
+  $('destinationOut').textContent = labels[type][3] + last.destination;
   $('accountOut').hidden = type !== 'paybill';
   $('accountOut').textContent = 'Account number: ' + last.account;
   $('avatarOut').textContent = last.recipient.split(/\s+/).slice(0, 2).map(part => part[0]?.toUpperCase() || '').join('');
   $('tipSection').hidden = type !== 'till';
-  $('scheduleBtn').hidden = type !== 'till';
+  $('zidiSection').hidden = type !== 'send';
+  $('reverseBtn').hidden = type !== 'send';
+  $('scheduleBtn').hidden = type !== 'send' && type !== 'till';
+  $('preview').classList.toggle('send-preview', type === 'send');
   $('dashboard').hidden = true;
   $('preview').hidden = false;
   window.scrollTo(0, 0);
@@ -99,6 +102,8 @@ $('copyBtn').onclick = () => navigator.clipboard?.writeText(last.reference).then
 ).catch(() => alert(last.reference));
 $('favoriteBtn').onclick = () => alert('This is a demo preview. No favourites are saved.');
 $('scheduleBtn').onclick = () => alert('Scheduling is disabled in demo mode.');
+$('reverseBtn').onclick = () => alert('Reverse transaction is disabled in demo mode.');
+$('zidiSettingsBtn').onclick = () => alert('ZiiDi settings are disabled in demo mode.');
 
 $('shareBtn').onclick = async () => {
   if (!last) return;

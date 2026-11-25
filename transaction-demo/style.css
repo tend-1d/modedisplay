@@ -310,8 +310,8 @@ input:focus {
 }
 
 .preview-nav {
-  --mpesa-logo-diameter: 53px;
-  --mpesa-logo-box-size: 53px;
+  --mpesa-logo-diameter: 56px;
+  --mpesa-logo-box-size: 56px;
   position: relative;
   z-index: 4;
   flex: 0 0 auto;
@@ -362,6 +362,7 @@ input:focus {
   top: -12px;
   left: calc(var(--mpesa-logo-box-size) + 8px);
   width: var(--mpesa-logo-diameter);
+  min-height: 52px;
   border: 1px solid #45454d;
   border-radius: 2px;
   padding: 4px;
@@ -772,7 +773,7 @@ h2 {
   }
 
   .confirmation-bubble {
-    min-height: 0;
+    min-height: 52px;
   }
 
   .share {

@@ -1,6 +1,6 @@
 # Transaction Demo Studio
 
-A standalone mobile-first transaction simulation website. It supports exactly four types: Send Money, Buy Goods (Till Number), Pay Bill, and Pochi la Biashara.
+A standalone mobile-first transaction simulation website with a home screen, Send Money screen, and Lipa na M-PESA screen. Pochi la Biashara is available from both Send Money and Lipa na M-PESA.
 
 ## Run locally
 
@@ -16,11 +16,11 @@ Upload `index.html`, `style.css`, `script.js`, `manifest.webmanifest`, and the `
 
 ## Behavior
 
-- Captures current time at the moment Generate is clicked and formats it in Africa/Nairobi time.
-- Four transaction types only.
-- Supports preview, sharing demo details, and downloading a text demo receipt.
-- No real money is moved, no payments are verified, and all previews are marked DEMO.
-- The sample reference number is intentionally prefixed `DEMO-`.
+- Supports Send Money, Send Money to Pochi, Buy Goods, Paybill, and Lipa na M-PESA to Pochi. Each flow asks for the recipient or business name and displays it on the receipt and confirmation message.
+- Generates a transaction preview with the current Africa/Nairobi time, a demo reference, and a simulated confirmation message.
+- Supports sharing demo details, copying the demo reference, and downloading a text demo receipt.
+- This is a simulation only: no money is moved, no payment is verified, and displayed balances are placeholders.
+- Other visible shortcuts explain when an action is not supported in this demo.
 
 ## Notes
 

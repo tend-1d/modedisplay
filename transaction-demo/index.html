@@ -11,50 +11,188 @@
   </head>
 
   <body>
-    <main id="dashboard">
-      <section class="intro">
-        <h1>Create transaction</h1>
-        <p>Select one of the four supported transaction types and enter the details.</p>
-      </section>
+    <dialog id="welcomeDialog" class="welcome-dialog" aria-labelledby="welcomeTitle" aria-describedby="welcomePrompt">
+      <form id="welcomeForm" class="welcome-form">
+        <h2 id="welcomeTitle">Welcome</h2>
+        <p id="welcomePrompt">What should we call you?</p>
+        <label for="firstNameInput">First name</label>
+        <input id="firstNameInput" name="firstName" type="text" autocomplete="given-name" maxlength="40" required>
+        <p id="welcomeError" class="welcome-error" role="alert" aria-live="polite"></p>
+        <button type="submit">Continue</button>
+      </form>
+    </dialog>
 
-      <section class="panel">
-        <label class="field-label">Transaction type</label>
-        <div class="types" id="types">
-          <button class="type active" data-type="send">Send Money</button>
-          <button class="type" data-type="till">Buy Goods</button>
-          <button class="type" data-type="paybill">Pay Bill</button>
-          <button class="type" data-type="pochi">Pochi la Biashara</button>
+    <main id="dashboard" class="home-screen">
+      <header class="home-header">
+        <button class="home-avatar" type="button" data-demo-action="profile" aria-label="Profile"><span id="profileInitials" aria-hidden="true"></span></button>
+        <div class="home-greeting"><span id="greetingPeriod"></span><strong><span id="greetingName">there</span> 👋</strong></div>
+        <div class="home-tools">
+          <button class="round-tool" type="button" data-demo-action="notifications" aria-label="Notifications"><img src="assets/quick-notifications.png" alt=""></button>
+          <button class="round-tool" type="button" data-demo-action="search" aria-label="Search"><img src="assets/quick-search.png" alt=""></button>
         </div>
+      </header>
 
-        <form id="demoForm">
-          <label for="amount">Amount (KES)</label>
-          <input id="amount" inputmode="decimal" type="number" min="0.01" step="0.01" placeholder="e.g. 100" required>
-
-          <label for="recipient" id="recipientLabel">Recipient name</label>
-          <input id="recipient" maxlength="80" placeholder="Enter recipient name" required>
-
-          <label for="destination" id="destinationLabel">Phone number</label>
-          <input id="destination" maxlength="24" placeholder="Enter phone number" required>
-
-          <div id="accountGroup" hidden>
-            <label for="account">Account number</label>
-            <input id="account" maxlength="40" placeholder="Enter account number">
+      <section class="balance-carousel" aria-label="Balances">
+        <article class="balance-card mpesa-balance">
+          <div class="balance-title">M-PESA Balance</div>
+          <div class="balance-amount-row">
+            <div class="balance-value" id="balanceValue">Ksh *****</div>
+            <button id="balanceToggle" class="balance-toggle" type="button" aria-label="Show M-PESA balance" aria-pressed="false" title="Show M-PESA balance">
+              <img id="balanceEyeOpen" class="balance-eye-icon" src="assets/balance-eye-open.png" alt="" aria-hidden="true">
+              <img id="balanceEyeClosed" class="balance-eye-icon" src="assets/balance-eye-closed.png" alt="" aria-hidden="true" hidden>
+            </button>
           </div>
+          <div id="availableFuliza" class="available-fuliza" hidden>Available Fuliza: Ksh 200.00</div>
+          <button class="statements-button" type="button" data-demo-action="statements">View Statements</button>
+        </article>
+        <article class="balance-card other-balance">
+          <div class="balance-title">My Balances</div>
+          <p>Airtime</p>
+          <strong>Ksh. 0</strong>
+          <p>Fuliza</p>
+          <strong>Ksh. ******</strong>
+        </article>
+      </section>
+      <div class="balance-pagination" aria-hidden="true"><i></i><i></i></div>
 
-          <label for="fee">Transaction cost (KES)</label>
-          <input id="fee" type="number" min="0" step="0.01" value="0" required>
-
-          <div class="time-hint">◷ &nbsp; Date and time are captured automatically (Kenya time).</div>
-          <button class="primary" type="submit">preview</button>
-        </form>
+      <section class="home-section quick-section">
+        <div class="section-heading"><h2>Quick Actions</h2><button type="button" data-demo-action="view-all">View all <img src="assets/quick-view-all-arrow.png" alt=""></button></div>
+        <div class="quick-grid">
+          <button class="quick-action" type="button" data-open="send"><span class="quick-icon" aria-hidden="true"><img src="assets/quick-send.png" alt=""></span>Send<br>Money</button>
+          <button class="quick-action" type="button" data-open="lipa"><span class="quick-icon" aria-hidden="true"><img src="assets/quick-lipa.png" alt=""></span>Lipa na<br>M-PESA</button>
+          <button class="quick-action" type="button" data-demo-action="withdraw"><span class="quick-icon" aria-hidden="true"><img src="assets/quick-withdraw.png" alt=""></span>Withdraw<br>Money</button>
+          <button class="quick-action" type="button" data-open="pochi"><span class="quick-icon" aria-hidden="true"><img src="assets/quick-pochi.png" alt=""></span>Pochi<br>Wallet</button>
+          <button class="quick-action" type="button" data-demo-action="bundles"><span class="quick-icon" aria-hidden="true"><img src="assets/quick-bundles.png" alt=""></span>Buy<br>Bundles</button>
+          <button class="quick-action" type="button" data-demo-action="airtime"><span class="quick-icon" aria-hidden="true"><img src="assets/quick-airtime.png" alt=""></span>Airtime<br>Top Up</button>
+          <button class="quick-action" type="button" data-demo-action="tunukiwa"><span class="quick-icon" aria-hidden="true"><img src="assets/quick-tunukiwa.png" alt=""></span>Tunukiwa<br>Bundles</button>
+          <button class="quick-action" type="button" data-demo-action="internet"><span class="quick-icon" aria-hidden="true"><img src="assets/quick-internet.png" alt=""></span>Home<br>Internet</button>
+        </div>
       </section>
 
-      <p class="disclaimer"></p>
+      <button class="frequents-bar" type="button" data-demo-action="frequents">Frequents <span aria-hidden="true"><img src="assets/quick-frequents-chevron.png" alt=""></span></button>
+
+      <section class="deals-section">
+        <h2>Explore &amp; Discover Deals 🔥</h2>
+        <button class="deals-card" type="button" data-demo-action="deals" aria-label="ATA MORE offer, scan to pay">
+          <img src="assets/ata-more-deal.jpeg" alt="">
+        </button>
+      </section>
+    </main>
+
+    <main id="sendScreen" class="entry-screen" hidden>
+      <header class="page-header">
+        <button class="back-button" type="button" data-home aria-label="Back"><img src="assets/form-back.png" alt=""></button>
+        <h1>Send Money</h1><span class="header-spacer"></span>
+      </header>
+      <div class="mode-switch send-mode-switch" role="tablist" aria-label="Send Money type">
+        <button class="mode-tab selected" type="button" data-send-mode="mobile" role="tab" aria-selected="true">Mobile number</button>
+        <button class="mode-tab" type="button" data-send-mode="pochi" role="tab" aria-selected="false">Pochi la Biashara</button>
+      </div>
+      <section class="favorites-strip">
+        <div class="section-heading"><h2>Favourites</h2><button type="button" data-demo-action="view-favourites">View All</button></div>
+        <button class="favorite-add" type="button" data-demo-action="add-favourite"><span><img src="assets/favorite-add.png" alt=""></span>Add</button>
+      </section>
+      <form id="sendForm" class="entry-form">
+        <label id="sendRecipientNameLabel" for="sendRecipientName">Enter recipient's full name</label>
+        <input id="sendRecipientName" type="text" autocomplete="name" maxlength="80" placeholder="Enter recipient's full name" required>
+        <label for="sendNumber">Enter Phone Number</label>
+        <div class="input-shell">
+          <input id="sendNumber" type="tel" inputmode="tel" maxlength="24" placeholder="Enter Phone Number" required>
+          <button class="field-icon" type="button" data-demo-action="contacts" aria-label="Choose a contact"><img src="assets/contact-picker.png" alt=""></button>
+          <button id="sendScanButton" class="field-icon qr-icon send-scan-icon" type="button" data-demo-action="scan" aria-label="Scan a phone number"><img src="assets/qr-scan.png" alt=""></button>
+        </div>
+        <label for="sendAmount">Enter Amount</label>
+        <div class="amount-shell">
+          <input id="sendAmount" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="0" required>
+          <span>Ksh</span>
+        </div>
+        <div class="account-balance hidden-balance">Balance: Ksh ***** &nbsp; - &nbsp; Fuliza: ******</div>
+        <h2 class="form-section-title">Select Payment Method</h2>
+        <div class="payment-methods two-methods" data-payment-group>
+          <button class="payment-method selected" type="button" data-method="M-PESA" aria-pressed="true"><span class="method-symbol mpesa-symbol" aria-hidden="true"><img src="assets/payment-mpesa.png" alt=""></span><strong>M-PESA</strong><small>Bal. Ksh. 313.03</small></button>
+          <button class="payment-method" type="button" data-method="Shiriki Pay" aria-pressed="false"><span class="method-symbol shiriki-symbol" aria-hidden="true"><img src="assets/payment-shiriki.png" alt=""></span><strong>Shiriki Pay</strong><small>Select</small></button>
+        </div>
+        <button class="continue-button" id="sendContinue" type="submit" disabled>Continue</button>
+      </form>
+      <section class="do-more-section">
+        <h2>Do More</h2>
+        <div class="do-more-grid">
+          <button type="button" data-demo-action="send-many"><span><img src="assets/do-more-send-many.png" alt=""></span>Send to<br>Many</button>
+          <button type="button" data-demo-action="request-money"><span><img src="assets/do-more-request-money.png" alt=""></span>Request<br>Money</button>
+          <button type="button" data-open="invest"><span class="zidi-mini"><img src="assets/do-more-zidi.png" alt=""></span>Invest to<br>ZiiDi</button>
+        </div>
+      </section>
+    </main>
+
+    <main id="lipaScreen" class="entry-screen" hidden>
+      <header class="page-header">
+        <button class="back-button" type="button" data-home aria-label="Back"><img src="assets/form-back.png" alt=""></button>
+        <h1>Lipa na M-PESA</h1><span class="header-spacer"></span>
+      </header>
+      <div class="mode-switch lipa-mode-switch" role="tablist" aria-label="Lipa na M-PESA type">
+        <button class="mode-tab selected" type="button" data-lipa-mode="goods" role="tab" aria-selected="true">Buy Goods</button>
+        <button class="mode-tab" type="button" data-lipa-mode="paybill" role="tab" aria-selected="false">Paybill</button>
+        <button class="mode-tab" type="button" data-lipa-mode="pochi" role="tab" aria-selected="false">Pochi la Biashara</button>
+      </div>
+      <section class="favorites-strip">
+        <div class="section-heading"><h2>Favourites</h2><button type="button" data-demo-action="view-favourites">View All</button></div>
+        <button class="favorite-add" type="button" data-demo-action="add-favourite"><span><img src="assets/favorite-add.png" alt=""></span>Add</button>
+      </section>
+      <form id="lipaForm" class="entry-form">
+        <label id="lipaRecipientNameLabel" for="lipaRecipientName">Enter business name</label>
+        <input id="lipaRecipientName" type="text" autocomplete="organization" maxlength="80" placeholder="Enter business name" required>
+        <div id="tillNumberGroup" class="number-group">
+          <label for="tillNumber">Enter till number</label>
+          <div class="input-shell">
+            <input id="tillNumber" type="tel" inputmode="numeric" maxlength="24" placeholder="Enter till number" required>
+            <button class="field-icon qr-icon" type="button" data-demo-action="scan" aria-label="Scan till number"><img src="assets/qr-scan.png" alt=""></button>
+          </div>
+        </div>
+        <div id="paybillNumberGroup" class="number-group" hidden>
+          <label for="paybillNumber">Enter paybill number</label>
+          <div class="input-shell"><input id="paybillNumber" type="tel" inputmode="numeric" maxlength="24" placeholder="Enter paybill number"><button class="field-icon qr-icon" type="button" data-demo-action="scan" aria-label="Scan paybill number"><img src="assets/qr-scan.png" alt=""></button></div>
+        </div>
+        <div id="pochiNumberGroup" class="number-group" hidden>
+          <label for="lipaPochiNumber">Enter Phone Number</label>
+          <div class="input-shell"><input id="lipaPochiNumber" type="tel" inputmode="tel" maxlength="24" placeholder="Enter Phone Number"><button class="field-icon" type="button" data-demo-action="contacts" aria-label="Choose a contact"><img src="assets/contact-picker.png" alt=""></button></div>
+        </div>
+        <div id="accountNumberGroup" class="number-group" hidden>
+          <label for="lipaAccount">Enter account number</label>
+          <div class="input-shell"><input id="lipaAccount" type="text" maxlength="40" placeholder="Enter account number"></div>
+        </div>
+        <label for="lipaAmount">Enter amount</label>
+        <div class="amount-shell">
+          <input id="lipaAmount" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="0" required>
+          <span>Ksh</span>
+        </div>
+        <div class="account-balance" id="lipaBalance">Balance: Ksh ***** &nbsp; - &nbsp; Fuliza: ******</div>
+        <h2 class="form-section-title">Select Payment Method</h2>
+        <div class="payment-methods three-methods" data-payment-group>
+          <button class="payment-method selected" type="button" data-method="M-PESA" aria-pressed="true"><span class="method-symbol mpesa-symbol" aria-hidden="true"><img src="assets/payment-mpesa.png" alt=""></span><strong>M-PESA</strong><small>Ksh. *****</small></button>
+          <button class="payment-method bonga-method" type="button" data-method="Bonga Points" aria-pressed="false"><span class="method-symbol bonga-symbol" aria-hidden="true"><img src="assets/payment-bonga.png" alt=""></span><strong>Bonga Points</strong><small>Ksh. 0</small></button>
+          <button class="payment-method" type="button" data-method="Shiriki Pay" aria-pressed="false"><span class="method-symbol shiriki-symbol" aria-hidden="true"><img src="assets/payment-shiriki.png" alt=""></span><strong>Shiriki Pay</strong><small>Select</small></button>
+        </div>
+        <button class="continue-button" id="lipaContinue" type="submit" disabled>Continue</button>
+      </form>
+      <section class="do-more-section">
+        <h2>Do More</h2>
+        <div class="do-more-grid">
+          <button type="button" data-demo-action="send-many"><span><img src="assets/do-more-send-many.png" alt=""></span>Send to<br>Many</button>
+          <button type="button" data-demo-action="request-money"><span><img src="assets/do-more-request-money.png" alt=""></span>Request<br>Money</button>
+          <button type="button" data-open="invest"><span class="zidi-mini"><img src="assets/do-more-zidi.png" alt=""></span>Invest to<br>ZiiDi</button>
+        </div>
+      </section>
     </main>
 
     <main id="preview" hidden>
       <div class="preview-nav">
-        <button id="backBtn" class="icon-button" aria-label="Back">✕</button>
+        <button id="backBtn" class="icon-button mpesa-button" aria-label="Back to transaction form">
+          <img class="mpesa-mark" src="assets/mpesa logo.jpeg" alt="">
+        </button>
+        <div id="confirmationBubble" class="confirmation-bubble" aria-live="polite" hidden>
+          <span class="confirmation-sender">M-PESA</span>
+          <span id="confirmationMessage" class="confirmation-message"></span>
+        </div>
         <button id="shareBtn" class="share">
           <img class="share-logo" src="assets/logo.jpeg" alt="">
           &nbsp;Share Details
@@ -74,7 +212,7 @@
 
           <p class="reference">
             ID: <span id="referenceOut"></span>
-            <button id="copyBtn" aria-label="Copy ID">▢ Copy</button>
+            <button id="copyBtn" aria-label="Copy ID"><img src="assets/receipt-copy.png" alt=""> Copy</button>
           </p>
 
           <div class="recipient-card">
@@ -89,25 +227,25 @@
             </div>
           </div>
 
-          <div id="zidiSection" class="zidi-section" hidden>
-            <div class="zidi-brand">
-              <span class="zidi-logo">ZiiDi</span>
-              <span>ZiiDi Autoinvest is<br>active</span>
-            </div>
-            <button id="zidiSettingsBtn" class="zidi-settings">Edit Settings</button>
-          </div>
-
           <div id="tipSection" class="tip-section">
             <p>Liked our Service?</p>
-            <span class="tip-button">Add Tip</span>
+            <button id="tipBtn" class="tip-button" type="button">Add Tip</button>
           </div>
         </div>
       </article>
 
+      <div id="zidiSection" class="zidi-section" hidden>
+        <div class="zidi-brand">
+          <span class="zidi-logo">ZiiDi</span>
+          <span>ZiiDi Autoinvest is<br>active</span>
+        </div>
+        <button id="zidiSettingsBtn" class="zidi-settings">Edit Settings</button>
+      </div>
+
       <div class="actions">
         <button id="favoriteBtn"><span><img src="assets/favorite.jpeg" alt=""></span>Add to<br>favourites</button>
         <button id="reverseBtn"><span>↻</span>Reverse<br>transaction</button>
-        <button id="scheduleBtn"><span>▦</span>Schedule<br>payment</button>
+        <button id="scheduleBtn"><span><img src="assets/schedule payment.jpeg" alt=""></span>Schedule<br>payment</button>
         <button id="downloadBtn"><span><img src="assets/download-transcript.jpeg" alt=""></span>Download<br>receipt</button>
       </div>
 
